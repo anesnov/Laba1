@@ -32,7 +32,6 @@ namespace Test
         {
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Вход = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,6 +40,9 @@ namespace Test
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.Вход = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Выход1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Выход2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,27 +63,8 @@ namespace Test
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(343, 447);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // Вход
-            // 
-            this.Вход.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Вход.HeaderText = "Вход";
-            this.Вход.Name = "Вход";
-            this.Вход.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Выход1
-            // 
-            this.Выход1.HeaderText = "Выход 1";
-            this.Выход1.Name = "Выход1";
-            this.Выход1.ReadOnly = true;
-            this.Выход1.ToolTipText = "Метод “пузырька” ";
-            // 
-            // Выход2
-            // 
-            this.Выход2.HeaderText = "Выход 2";
-            this.Выход2.Name = "Выход2";
-            this.Выход2.ReadOnly = true;
-            this.Выход2.ToolTipText = "Метод вставки с бинарным включением";
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
             // 
             // button3
             // 
@@ -147,23 +130,43 @@ namespace Test
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(358, 415);
+            this.button1.Location = new System.Drawing.Point(358, 409);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(122, 29);
             this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
+            this.button1.Text = "Сохранить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(434, 415);
+            this.button2.Location = new System.Drawing.Point(516, 409);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(122, 29);
             this.button2.TabIndex = 10;
-            this.button2.Text = "button2";
+            this.button2.Text = "Загрузить";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // Вход
+            // 
+            this.Вход.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Вход.HeaderText = "Вход";
+            this.Вход.Name = "Вход";
+            this.Вход.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Выход1
+            // 
+            this.Выход1.HeaderText = "Выход 1";
+            this.Выход1.Name = "Выход1";
+            this.Выход1.ToolTipText = "Метод “пузырька” ";
+            // 
+            // Выход2
+            // 
+            this.Выход2.HeaderText = "Выход 2";
+            this.Выход2.Name = "Выход2";
+            this.Выход2.ReadOnly = true;
+            this.Выход2.ToolTipText = "Метод вставки с бинарным включением";
             // 
             // Form1
             // 
@@ -192,9 +195,6 @@ namespace Test
         #endregion
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Вход;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Выход1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Выход2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label1;
@@ -203,6 +203,9 @@ namespace Test
         private Label label4;
         private Button button1;
         private Button button2;
+        private DataGridViewTextBoxColumn Вход;
+        private DataGridViewTextBoxColumn Выход1;
+        private DataGridViewTextBoxColumn Выход2;
     }
 }
 

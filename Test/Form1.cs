@@ -127,7 +127,7 @@ namespace Test
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            for (int i = 1; i < array.Length; i++)
+            for (int i = 1; i < len; i++)
             {
                 int x = array[i];
 
@@ -153,13 +153,10 @@ namespace Test
             label4.Text = "Время: " + stopwatch.Elapsed;
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e) //save
         {
             DataTable dt = new DataTable();
-            foreach (DataGridViewColumn col in dataGridView1.Columns)
-            {
-                dt.Columns.Add(col.Name);
-            }
+            dt.Columns.Add(dataGridView1.Columns[0].Name);
 
             //foreach (DataGridViewRow row in dataGridView1.Rows)
             //{
@@ -191,7 +188,7 @@ namespace Test
                     ds.Tables.Add(dt);
                     XmlTextWriter xmlSave = new XmlTextWriter(sfd.FileName, Encoding.UTF8);
                     xmlSave.Formatting = Formatting.Indented;
-                    ds.DataSetName = "Data";
+                    ds.DataSetName = "Table";
                     ds.Tables[0].WriteXml(xmlSave);
                     //dt.WriteXml(sfd.FileName);
                 }
@@ -202,8 +199,11 @@ namespace Test
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) //load
         {
+            for (int i = 0; i < 3; i++) Clear(i);
+            for(int i = 1; i < dataGridView1.Rows.Count; i++) dataGridView1.Rows.RemoveAt(1);
+
             DataSet ds = new DataSet();
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "XML|*.xml";
@@ -213,13 +213,40 @@ namespace Test
                 {
                     XmlReader xmlFile = XmlReader.Create(ofd.FileName, new XmlReaderSettings());
                     ds.ReadXml(xmlFile);
-                    dataGridView1.DataSource = ds.Tables[0].DefaultView; //
+                    //dataGridView1.DataSource = ds.Tables[0].DefaultView; 
+                    for (int j = 0; j< ds.Tables[0].Rows.Count; j++)
+                    {
+                        DataRow row = ds.Tables[0].Rows[j];
+                        dataGridView1.Rows.Add();
+                        for(int i = 0; i<row.ItemArray.Length; i++)
+                        {
+                            dataGridView1.Rows[j].Cells[i].Value = row.ItemArray[i];
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
                 }
             }
+        }
+
+        private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            MessageBox.Show("test");
+            try
+            {
+                Clear(e.ColumnIndex);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
