@@ -33,8 +33,6 @@ namespace Test
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Вход = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Выход1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Выход2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
