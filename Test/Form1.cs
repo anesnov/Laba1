@@ -47,18 +47,16 @@ namespace Test
         {
             dataGridView1.RefreshEdit();
             anError.ThrowException = false;            
-        }         
+        }        
 
         private void button3_Click(object sender, EventArgs e)        //Пузырёк
         {
-
             void Swap(ref int e1, ref int e2)
             {
                 var temp = e1;
                 e1 = e2;
                 e2 = temp;
             }
-
             Clear(1);
 
             int[] array = new int[dataGridView1.RowCount - 1];
@@ -140,7 +138,7 @@ namespace Test
                                   i - j);
 
                 array[j] = x;
-                count++;
+                count += array.Length-j;
             }
             stopwatch.Stop();
 
@@ -231,22 +229,45 @@ namespace Test
             }
         }
 
-        private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private int[][] getarray(int col)
         {
-            MessageBox.Show("test");
-            try
-            {
-                Clear(e.ColumnIndex);
+            int[][] array = new int[2][];
+            array[0] = new int[dataGridView2.RowCount];
+            array[1] = new int[dataGridView2.RowCount];
+            for (int i = 0; i< dataGridView2.RowCount; i++)
+            {                
+                array[0][i] = i;
+                array[1][i] = int.Parse(dataGridView2.Rows[i].Cells[col].Value.ToString());
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+            return array;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView2_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            void Swap(DataGridViewRow e1, DataGridViewRow e2)
+            {
+                var temp = e1;
+                e1 = e2;
+                e2 = temp;
+            }
 
+            int count = 0;
+            for(int i=0; i< dataGridView2.Rows.Count; i++)
+            {
+                for (var j = 0; j < dataGridView2.Rows.Count - i; j++)
+                {
+                    if (dataGridView2.Rows[j].Cells[e.ColumnIndex].Value.ToString()[0] > dataGridView2.Rows[j + 1].Cells[e.ColumnIndex].Value.ToString()[0])
+                    {
+                        Swap(dataGridView2.Rows[j], dataGridView2.Rows[j + 1]);
+                        count++;
+                    }
+
+                }
+
+            }
+
+            MessageBox.Show("Выбран столбец "+e.ColumnIndex);
         }
     }
 }
